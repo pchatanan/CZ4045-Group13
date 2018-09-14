@@ -9,6 +9,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
+venv/
 build/
 develop-eggs/
 dist/
@@ -23,6 +24,9 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+
+#Pycharm ide
+.idea
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -56,3 +60,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# This file is too big
+src/raw/CellPhoneReview\.json
