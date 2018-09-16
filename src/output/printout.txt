@@ -1,0 +1,40 @@
+5 sampled sentences
+A great seller.
+its and ok product I cant complain I mean it could have been better but it does what it suppose to do and that's it
+On the down side, one of the strap clips broke the first time I used it.
+Protects the expensive phone great!
+If you follow the instructions and use the included dust tape and applicator it goes on smooth, no air bubbles, with minimal effort.
+I bought it and it came pretty fast, about 3 days later.
+
+List the top-20 most frequent words
+
+non_stemmed_words_frequency
+('phone', 171056)
+('case', 139891)
+('like', 69857)
+('use', 59856)
+('screen', 57641)
+('great', 56178)
+('battery', 53817)
+('good', 53078)
+('well', 46585)
+('charge', 43554)
+
+stemmed_words_frequency
+('phone', 189482)
+('case', 163278)
+('charge', 129333)
+('use', 116695)
+('like', 79627)
+('work', 75515)
+('great', 66011)
+('battery', 65066)
+('screen', 61069)
+('good', 58074)
+
+5 POS Tagging
+[('Got', 'NNP'), ('this', 'DT'), ('for', 'IN'), ('my', 'PRP$'), ('dad', 'NN'), ('.', '.')]
+[('There', 'EX'), ('are', 'VBP'), ('a', 'DT'), ('lot', 'NN'), ('of', 'IN'), ('vendors', 'NNS'), ('selling', 'VBG'), ('this', 'DT'), ('battery', 'NN'), ('on', 'IN'), ('Amazon.Some', 'NNP'), ('of', 'IN'), ('the', 'DT'), ('reviews', 'NNS'), ('are', 'VBP'), ('negative.I', 'RB'), ('decided', 'VBN'), ('to', 'TO'), ('go', 'VB'), ('with', 'IN'), ('a', 'DT'), ('vendor', 'NN'), ('I', 'PRP'), ("'d", 'MD'), ('had', 'VBN'), ('good', 'JJ'), ('luck', 'NN'), ('with', 'IN'), ('in', 'IN'), ('the', 'DT'), ('past.Zeetron', 'NN'), ('includes', 'VBZ'), ('free', 'JJ'), ('shipping', 'NN'), (',', ','), ('and', 'CC'), ('is', 'VBZ'), ('VERY', 'NNP'), ('prompt', 'NN'), ('at', 'IN'), ('getting', 'VBG'), ('the', 'DT'), ('product', 'NN'), ('out', 'IN'), ('the', 'DT'), ('door.At', 'NN'), ('only', 'RB'), ('$', '$'), ('7.50', 'CD'), (',', ','), ('I', 'PRP'), ('was', 'VBD'), ("n't", 'RB'), ('about', 'RB'), ('to', 'TO'), ('pinch', 'VB'), ('pennies', 'NNS'), ('and', 'CC'), ('take', 'VB'), ('a', 'DT'), ('chance.The', 'NN'), ('battery', 'NN'), ('has', 'VBZ'), ('been', 'VBN'), ('in', 'IN'), ('use', 'NN'), ('for', 'IN'), ('several', 'JJ'), ('months', 'NNS'), (',', ','), ('and', 'CC'), ('I', 'PRP'), ('could', 'MD'), ("n't", 'RB'), ('be', 'VB'), ('happier', 'JJR'), ('!', '.'), ('Five', 'CD'), ('stars', 'NNS'), (':', ':'), ('*', 'NN'), ('*', 'NNP'), ('*', 'NNP'), ('*', 'NNP'), ('*', 'NN')]
+[('Minimalist', 'NN'), ('and', 'CC'), ('good', 'JJ'), ('looks', 'NNS'), ('.', '.')]
+[('When', 'WRB'), ('my', 'PRP$'), ('phone', 'NN'), ('charge', 'NN'), ('is', 'VBZ'), ('down', 'RB'), ('to', 'TO'), ('less', 'JJR'), ('than', 'IN'), ('15', 'CD'), ('%', 'NN'), (',', ','), ('I', 'PRP'), ('just', 'RB'), ('switch', 'VB'), ('the', 'DT'), ('battery', 'NN'), ('out', 'RP'), ('for', 'IN'), ('a', 'DT'), ('fresh', 'JJ'), ('one', 'CD'), (',', ','), ('place', 'VBZ'), ('the', 'DT'), ('drained', 'JJ'), ('one', 'CD'), ('in', 'IN'), ('the', 'DT'), ('battery', 'NN'), ('charger', 'NN'), (',', ','), ('and', 'CC'), ('move', 'VB'), ('on', 'IN'), ('with', 'IN'), ('less', 'JJR'), ('than', 'IN'), ('a', 'DT'), ('1', 'CD'), ('min', 'NN'), ('interruption', 'NN'), ('.', '.')]
+[('This', 'DT'), ('is', 'VBZ'), ('a', 'DT'), ('neat', 'JJ'), ('accessory', 'NN'), ('for', 'IN'), ('any', 'DT'), ('phone', 'NN'), ('with', 'IN'), ('a', 'DT'), ('headphone', 'NN'), ('jack', 'NN'), ('.', '.')]

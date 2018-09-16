@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# large file
+src/raw/save.p
+
 # C extensions
 *.so
 
