@@ -13,7 +13,6 @@ import pickle
 
 ps = PorterStemmer()  # This is for nltk stemming
 stop_words_custom = ['n\'t', 'one', 'two', '\'s', 'would', 'get', 'very']
-stop_words_list = stopwords.words("english") + list(string.punctuation) + stop_words_custom
 
 do_not_stem_list = ["the", "this", "was", "battery", "charge", "because", "very", "verify"]
 my_stem_ref = {
@@ -159,6 +158,8 @@ if __name__ == "__main__":
     # Load necessary corpus
     for corpus in ["stopwords", "punkt", "averaged_perceptron_tagger"]:
         check_corpus(corpus)
+    stop_words_list = stopwords.words("english") + list(string.punctuation) + stop_words_custom
+
     # Load data
     print("Loading pickle...")
     try:
