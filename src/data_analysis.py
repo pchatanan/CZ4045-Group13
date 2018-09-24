@@ -10,9 +10,10 @@ import multiprocessing
 import sys
 import string
 import pickle
-
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+nltk.download('vader_lexicon')
 ps = PorterStemmer()  # This is for nltk stemming
-stop_words_custom = ['n\'t', 'one', 'two', '\'s', 'would', 'get', 'very']
+stop_words_custom = ['n\'t', 'one', 'two', '\'s', 'would', 'get', 'very','...']
 
 do_not_stem_list = ["the", "this", "was", "battery", "charge", "because", "very", "verify"]
 my_stem_ref = {
@@ -135,11 +136,23 @@ def process_review(text):
     # Word Tokenize and Stemming
     stemmed_words = []
     non_stemmed_words = []
+    pos=[]
+    neg=[]
+    neu=[]
     for sentence in sentence_tokenize_list:
         word_list = word_tokenize(sentence)
         non_stemmed_words += word_list
         for word in word_list:
             stemmed_words.append(my_stem(word.lower()))
+    if(review['overall']>3.0):
+        pos+=stemmed_words
+    elif(review['overall']<3.0):
+        neg+=stemmed_words
+    else:
+        neu+=stemmed_words
+    review['pos']=pos
+    review['neg']=neg
+    review['neu']=neu
     review["non_stemmed_words"] = non_stemmed_words
     review["num_non_stemmed_words"] = str(len(set(non_stemmed_words)))  # Set is needed (unrepeated count)
     review["stemmed_words"] = stemmed_words
@@ -151,6 +164,9 @@ def log_result(retrieval):
     results.append(retrieval)
     all_non_stemmed_words.extend(retrieval["non_stemmed_words"])
     all_stemmed_words.extend(retrieval["stemmed_words"])
+    all_pos.extend(retrieval["pos"])
+    all_neg.extend(retrieval["neg"])
+    all_neu.extend(retrieval["neu"])
     sys.stderr.write('\rdone {0:%}'.format(len(results) / n_reviews))
 
 
@@ -163,13 +179,13 @@ if __name__ == "__main__":
     # Load data
     print("Loading pickle...")
     try:
-        results, all_non_stemmed_words, all_stemmed_words = pickle.load(open("./raw/save.p", "rb"))
+        results, all_non_stemmed_words, all_stemmed_words,all_pos,all_neg,all_neu = pickle.load(open("save.p", "rb"))
         print("Found pickle!")
     except FileNotFoundError:
         print("Data is not processed yet. Processing now...")
         data = []
         # file_name = './raw/SampleReview.json'
-        file_name = './raw/CellPhoneReview.json'
+        file_name = 'SampleReview.json'
         with open(file_name) as file:
             for line in file:
                 data.append(line)
@@ -180,8 +196,12 @@ if __name__ == "__main__":
         # Variable for word tokenization
         all_non_stemmed_words = []
         all_stemmed_words = []
+        all_pos=[]
+        all_neg=[]
+        all_neu=[]
 
-        # perform parallel processing (must faster than serial)
+
+    # perform parallel processing (must faster than serial)
         pool = multiprocessing.Pool(processes=multiprocessing.cpu_count() - 1)
         for item in data:
             pool.apply_async(process_review, args=[item], callback=log_result)
@@ -190,7 +210,7 @@ if __name__ == "__main__":
         print("")  # print linebreak
 
         # save in pickle
-        pickle.dump((results, all_non_stemmed_words, all_stemmed_words), open("./raw/save.p", "wb"))
+        pickle.dump((results, all_non_stemmed_words, all_stemmed_words,all_pos,all_neg,all_neu), open("save.p", "wb"))
 
     # Data set Analysis
     top_10_products = find_most_frequent(results, "asin", 10)
@@ -226,6 +246,36 @@ if __name__ == "__main__":
     non_stemmed_words_frequency = remove_stop_words(non_stemmed_words_frequency)
     stemmed_words_frequency = remove_stop_words(stemmed_words_frequency)
 
+    #Sentiment Analysis
+    all_pos_words= all_pos
+    all_neg_words= all_neg
+    all_neu_words= all_neu
+
+    allPosLower = [item.lower() for item in all_pos_words]
+    allNegLower = [item.lower() for item in all_neg_words]
+    allNeuLower = [item.lower() for item in all_neu_words]
+    sid = SentimentIntensityAnalyzer()
+    pos_word_list=[]
+    neu_word_list=[]
+    neg_word_list=[]
+
+    for word in all_stemmed_words:
+        word=word.lower()
+        if (sid.polarity_scores(word)['compound'] >= 0.4) and (word in allPosLower):
+            pos_word_list.append(word)
+        elif (sid.polarity_scores(word)['compound']) <= -0.4 and (word in allNegLower):
+            neg_word_list.append(word)
+        else:
+            neu_word_list.append(word)
+
+    pos_frequency = Counter(pos_word_list).most_common()
+    neu_frequency = Counter(neu_word_list).most_common()
+    neg_frequency = Counter(neg_word_list).most_common()
+
+    pos_frequency = remove_stop_words(pos_frequency)
+    neu_frequency = remove_stop_words(neu_frequency)
+    neg_frequency = remove_stop_words(neg_frequency)
+
     print("\nList the top-20 most frequent words")
     print("\nnon_stemmed_words_frequency")
     for i in range(10):
@@ -233,6 +283,20 @@ if __name__ == "__main__":
     print("\nstemmed_words_frequency")
     for i in range(10):
         print(stemmed_words_frequency[i])
+
+    print("\npos_words_frequency")
+    print(len(pos_frequency))
+    for i in range(10):
+        print(pos_frequency[i])
+
+    print("\nneu_words_frequency")
+    print(len(neu_frequency))
+    for i in range(10):
+        print(neu_frequency[i])
+    print("\nneg_words_frequency")
+    print(len(neg_frequency))
+    for i in range(10):
+        print(neg_frequency[i])
 
     # POS Tagging
     n_samples = 5
