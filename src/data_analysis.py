@@ -194,7 +194,13 @@ if __name__ == "__main__":
 
     # Data set Analysis
     top_10_products = find_most_frequent(results, "asin", 10)
+    print('\ntop_10_products')
+    for id, count in top_10_products:
+        print(id + ", " + str(count))
     top_10_reviewers = find_most_frequent(results, "reviewerID", 10)
+    print('\ntop_10_reviewers')
+    for id, count in top_10_reviewers:
+        print(id + ", " + str(count))
     top_10_num_sentences = find_most_frequent(results, "num_sentences", 10)
     top_10_num_non_stemmed_words = find_most_frequent(results, "num_non_stemmed_words", 10)
     top_10_num_stemmed_words = find_most_frequent(results, "num_stemmed_words", 10)
@@ -208,9 +214,7 @@ if __name__ == "__main__":
         sample_review = random.choice(results)
         sample_sentence_list = sample_review["sentence_tokenize"]
         sample_sentence = random.choice(sample_sentence_list)
-        if sample_sentence in stop_words_list:  # sometimes sentence segmentation break "!" into a sentence
-            i -= 1
-        else:
+        if sample_sentence not in stop_words_list:  # sometimes sentence segmentation break "!" into a sentence
             i += 1
             print(sample_sentence)
 

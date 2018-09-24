@@ -1,10 +1,33 @@
+top_10_products
+B005SUHPO6, 836
+B0042FV2SI, 690
+B008OHNZI0, 657
+B009RXU59C, 634
+B000S5Q9CA, 627
+B008DJIIG8, 510
+B0090YGJ4I, 448
+B009A5204K, 434
+B00BT7RAPG, 431
+B0015RB39O, 424
+
+top_10_reviewers
+A2NYK9KWFMJV4Y, 152
+A22CW0ZHY3NJH8, 138
+A1EVV74UQYVKRY, 137
+A1ODOGXEYECQQ8, 133
+A2NOW4U7W3F7RI, 132
+A36K2N527TXXJN, 124
+A1UQBFCERIP7VJ, 112
+A1E1LEVQ9VQNK, 109
+A18U49406IPPIJ, 109
+AYB4ELCS5AM8P, 107
+
 5 sampled sentences
 A great seller.
 its and ok product I cant complain I mean it could have been better but it does what it suppose to do and that's it
 On the down side, one of the strap clips broke the first time I used it.
 Protects the expensive phone great!
 If you follow the instructions and use the included dust tape and applicator it goes on smooth, no air bubbles, with minimal effort.
-I bought it and it came pretty fast, about 3 days later.
 
 List the top-20 most frequent words
 
