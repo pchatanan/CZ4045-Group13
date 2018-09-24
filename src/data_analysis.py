@@ -179,13 +179,13 @@ if __name__ == "__main__":
     # Load data
     print("Loading pickle...")
     try:
-        results, all_non_stemmed_words, all_stemmed_words,all_pos,all_neg,all_neu = pickle.load(open("save.p", "rb"))
+        results, all_non_stemmed_words, all_stemmed_words,all_pos,all_neg,all_neu = pickle.load(open("./raw/save.p", "rb"))
         print("Found pickle!")
     except FileNotFoundError:
         print("Data is not processed yet. Processing now...")
         data = []
         # file_name = './raw/SampleReview.json'
-        file_name = 'SampleReview.json'
+        file_name = './raw/CellPhoneReview.json'
         with open(file_name) as file:
             for line in file:
                 data.append(line)
@@ -210,7 +210,7 @@ if __name__ == "__main__":
         print("")  # print linebreak
 
         # save in pickle
-        pickle.dump((results, all_non_stemmed_words, all_stemmed_words,all_pos,all_neg,all_neu), open("save.p", "wb"))
+        pickle.dump((results, all_non_stemmed_words, all_stemmed_words,all_pos,all_neg,all_neu), open("./raw/save.p", "wb"))
 
     # Data set Analysis
     top_10_products = find_most_frequent(results, "asin", 10)
