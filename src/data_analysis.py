@@ -355,12 +355,26 @@ if __name__ == "__main__":
 
 
     # Noun Phrase Summarizer
+    ## Top 20 noun phrases
     data=[json.loads(item) for item in data]
     review_data=[item[reviewText] for item in data]
+    noun_phrases_list=[]
     pool = multiprocessing.Pool(processes=multiprocessing.cpu_count() - 1)
     for review in review_data:
         pool.apply_async(find_noun_phrases, args=[review], callback=log_noun_phrase_result)
     pool.close()
     pool.join()
-    top_20_noun_phrases=Counter(noun_phrases_list).most_common(20)
+    noun_phrases_counter=Counter(noun_phrases_list)
+    top_20_noun_phrases=noun_phrases_counter.most_common(20)
     plot_frequency(counter_noun_phrases,"top-20 noun phrases","noun phrases","no of times","v")
+
+    ## Representative noun phrases for top 3 products
+    top_3_products=[x[0] for x in top_10_products[:3]]
+    for product in top_3_products:
+        noun_phrases_list=[]
+        review_data=[item["reviewText"] for item in data if item['asin']==product]
+        pool = multiprocessing.Pool(processes=multiprocessing.cpu_count() - 1)
+        for review in review_data:
+            pool.apply_async(find_noun_phrases, args=[review], callback=get_result)
+        pool.close()
+        pool.join()
