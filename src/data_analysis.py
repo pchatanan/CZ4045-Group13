@@ -378,3 +378,15 @@ if __name__ == "__main__":
             pool.apply_async(find_noun_phrases, args=[review], callback=get_result)
         pool.close()
         pool.join()
+        noun_phrases_product_counter=Counter(noun_phrases_list)
+        noun_phrases_counter_dict=dict(noun_phrases_counter)
+        noun_phrases_product_counter_dict=dict(noun_phrases_product_counter)
+        for key in noun_phrases_product_counter_dict:
+            val1=noun_phrases_product_counter_dict[key]
+            val2=noun_phrases_counter_dict[key]
+            noun_phrases_product_counter_dict[key]=2*val1+(val2-val1)
+        print("Product-->"+product)
+        print("Representative phrases considering only product")
+        print(noun_phrases_product_counter.most_common(10))
+        print("Representative phrases considering all products")
+        print(Counter(noun_phrases_product_counter_dict).most_common(10))
