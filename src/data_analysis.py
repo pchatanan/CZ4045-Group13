@@ -170,6 +170,22 @@ def log_result(retrieval):
     sys.stderr.write('\rdone {0:%}'.format(len(results) / n_reviews))
 
 
+def find_noun_phrases(review):
+    '''
+    Returns list of noun phrases in the string
+    : param review: Review string
+    '''
+    noun_phrases=[]
+    regex = re.compile(r'(?:(?:\w+ DT )?(?:\w+ JJ )+)\w+ (?:N[NP]+|PRN)')
+    pos_tags=pos_tag(word_tokenize(review))
+    review=''.join([x+" "+y+" " for (x,y) in pos_tags])
+    result=regex.findall(review)
+    result=[x.replace(" JJ",'').replace(" NN",'').replace(" NP",'').replace(" DT",'').replace(" PRN",'') for x in result]
+    return result
+
+def log_noun_phrase_result(noun_phrases):
+    noun_phrases_list.extend(noun_phrases)
+
 if __name__ == "__main__":
     # Load necessary corpus
     for corpus in ["stopwords", "punkt", "averaged_perceptron_tagger"]:
@@ -336,3 +352,15 @@ if __name__ == "__main__":
                    "No. of reviews",
                    "h")
     plt.show()
+
+
+    # Noun Phrase Summarizer
+    data=[json.loads(item) for item in data]
+    review_data=[item[reviewText] for item in data]
+    pool = multiprocessing.Pool(processes=multiprocessing.cpu_count() - 1)
+    for review in review_data:
+        pool.apply_async(find_noun_phrases, args=[review], callback=log_noun_phrase_result)
+    pool.close()
+    pool.join()
+    top_20_noun_phrases=Counter(noun_phrases_list).most_common(20)
+    plot_frequency(counter_noun_phrases,"top-20 noun phrases","noun phrases","no of times","v")
