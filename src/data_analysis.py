@@ -170,21 +170,6 @@ def log_result(retrieval):
     sys.stderr.write('\rdone {0:%}'.format(len(results) / n_reviews))
 
 
-def find_noun_phrases(review):
-    '''
-    Returns list of noun phrases in the string
-    : param review: Review string
-    '''
-    noun_phrases=[]
-    regex = re.compile(r'(?:(?:\w+ DT )?(?:\w+ JJ )+)\w+ (?:N[NP]+|PRN)')
-    pos_tags=pos_tag(word_tokenize(review))
-    review=''.join([x+" "+y+" " for (x,y) in pos_tags])
-    result=regex.findall(review)
-    result=[x.replace(" JJ",'').replace(" NN",'').replace(" NP",'').replace(" DT",'').replace(" PRN",'') for x in result]
-    return result
-
-def log_noun_phrase_result(noun_phrases):
-    noun_phrases_list.extend(noun_phrases)
 
 if __name__ == "__main__":
     # Load necessary corpus
@@ -354,39 +339,4 @@ if __name__ == "__main__":
     plt.show()
 
 
-    # Noun Phrase Summarizer
-    ## Top 20 noun phrases
-    data=[json.loads(item) for item in data]
-    review_data=[item[reviewText] for item in data]
-    noun_phrases_list=[]
-    pool = multiprocessing.Pool(processes=multiprocessing.cpu_count() - 1)
-    for review in review_data:
-        pool.apply_async(find_noun_phrases, args=[review], callback=log_noun_phrase_result)
-    pool.close()
-    pool.join()
-    noun_phrases_counter=Counter(noun_phrases_list)
-    top_20_noun_phrases=noun_phrases_counter.most_common(20)
-    plot_frequency(counter_noun_phrases,"top-20 noun phrases","noun phrases","no of times","v")
-
-    ## Representative noun phrases for top 3 products
-    top_3_products=[x[0] for x in top_10_products[:3]]
-    for product in top_3_products:
-        noun_phrases_list=[]
-        review_data=[item["reviewText"] for item in data if item['asin']==product]
-        pool = multiprocessing.Pool(processes=multiprocessing.cpu_count() - 1)
-        for review in review_data:
-            pool.apply_async(find_noun_phrases, args=[review], callback=get_result)
-        pool.close()
-        pool.join()
-        noun_phrases_product_counter=Counter(noun_phrases_list)
-        noun_phrases_counter_dict=dict(noun_phrases_counter)
-        noun_phrases_product_counter_dict=dict(noun_phrases_product_counter)
-        for key in noun_phrases_product_counter_dict:
-            val1=noun_phrases_product_counter_dict[key]
-            val2=noun_phrases_counter_dict[key]
-            noun_phrases_product_counter_dict[key]=2*val1+(val2-val1)
-        print("Product-->"+product)
-        print("Representative phrases considering only product")
-        print(noun_phrases_product_counter.most_common(10))
-        print("Representative phrases considering all products")
-        print(Counter(noun_phrases_product_counter_dict).most_common(10))
+    
