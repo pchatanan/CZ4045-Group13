@@ -63,3 +63,5 @@ for product in top_3_products:
         noun_phrases_product_counter_dict[key]=2*val1+(val2-val1)
     print("\n\nProduct-->"+product)
     print(Counter(noun_phrases_product_counter_dict).most_common(10))
+
+## Explanation of randomly selected reviews noun phrase extraction in Report
