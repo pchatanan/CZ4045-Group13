@@ -61,8 +61,5 @@ for product in top_3_products:
         val1=noun_phrases_product_counter_dict[key]
         val2=noun_phrases_counter_dict[key]
         noun_phrases_product_counter_dict[key]=2*val1+(val2-val1)
-    print("Product-->"+product)
-    print("Representative phrases considering only product")
-    print(noun_phrases_product_counter.most_common(10))
-    print("Representative phrases considering all products")
+    print("\n\nProduct-->"+product)
     print(Counter(noun_phrases_product_counter_dict).most_common(10))
