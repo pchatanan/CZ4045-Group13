@@ -170,6 +170,7 @@ def log_result(retrieval):
     sys.stderr.write('\rdone {0:%}'.format(len(results) / n_reviews))
 
 
+
 if __name__ == "__main__":
     # Load necessary corpus
     for corpus in ["stopwords", "punkt", "averaged_perceptron_tagger"]:
@@ -336,3 +337,6 @@ if __name__ == "__main__":
                    "No. of reviews",
                    "h")
     plt.show()
+
+
+    
