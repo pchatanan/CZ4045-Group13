@@ -42,15 +42,6 @@ def print_results(sample):
 if __name__ == "__main__":
     
     print("This application attempts to identify comparative words in reviews from CellPhoneReview.json.")
-##    print("Enter/Paste your content. Ctrl-D or Ctrl-Z (Windows) followed by an Enter to register your input.")
-##    contents = []
-##    while True:
-##        try:
-##            line = input()
-##        except EOFError:
-##            break
-##        contents.append(line)
-##    print(contents)
     file = open('./raw/CellPhoneReview.json')
     lines = file.readlines()
     random.seed(int(time.time()))
@@ -63,9 +54,4 @@ if __name__ == "__main__":
         print("Sample {}.".format(i+1))
         print_results(sample)
         
-##    pool = multiprocessing.Pool(processes=multiprocessing.cpu_count() - 1)      
-##    for i in contents:
-##        pool.apply_async(search_comparative, args=[i],callback=store_result)
-##    pool.close()
-##    pool.join()
     
