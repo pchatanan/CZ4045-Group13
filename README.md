@@ -8,33 +8,44 @@ The 4 parts for this project include:
 3. Sentiment analysis on reviews
 4. Application - Comparative Expression on reviews
 
-Libraries and installation:
+### Libraries and installation:
+
+Install dependencies individually by:
 ```
 pip install nltk
 pip install pandas
 pip install matplotlib
 pip install numpy
-
-cd CZ4045-Group13/src/
-
-
- ======================================
-| Dataset Analysis & Sentiment Analysis|
- ======================================
 ```
-Run `python data_analysis.py` for results.
 
+or
+
+```
+pip install -r requirements.txt
+```
+
+ ===================
+| Dataset Analysis & Sentiment Analysis|
+ ===================
+
+To perform Data Analysis and Sentiment Analysis, run the following command:
+
+```
+cd CZ4045-Group13/src/
+python data_analysis.py
+```
 
  ======================
 | Noun Phrase Detector |
  ======================
 ```
-Run `python noun_phrase_summarizer.py` for results.
-
-
+cd CZ4045-Group13/src/
+python noun_phrase_summarizer.py
+```
  ========================
 | Comparative Expression |
  ========================
-
 ```
-Run `python comparativeExpr.py` for results.
+cd CZ4045-Group13/src/
+python comparativeExpr.py
+```
